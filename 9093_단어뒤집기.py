@@ -10,3 +10,5 @@ for i in range(t):
     #리스트 -> 문자열
     result = " ".join(case)
     print(result)
+
+# 스택으로 다시 풀기

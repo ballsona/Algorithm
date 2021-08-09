@@ -13,5 +13,5 @@ results = '<' + ', '.join(result) + '>'
 print(results)
 
 # 원형링크드리스트
-
+# deque 로 구현
 #nameerror

@@ -1,16 +1,17 @@
+
 import sys
 
 n, m = map(int, sys.stdin.readline().split())
-queue = []
+queue = list(range(1, n+1))
 result = []
-
-for i in range(n):
-    queue.append(i + 1)
 
 while len(queue) != 0:
     for _ in range(m - 1):
-        p = queue.pop(0)
-        queue.append(p)
+        queue.append(queue.pop(0))
     result.append(str(queue.pop(0)))
 results = '<' + ', '.join(result) + '>'
 print(results)
+
+# 원형링크드리스트
+
+#nameerror

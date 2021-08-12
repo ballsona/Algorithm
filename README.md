@@ -1,5 +1,4 @@
-# Baekjoon Online Judge 
-
+# Baekjoon Online Judge
 ---
 #### 사용한 언어 
 파이썬 

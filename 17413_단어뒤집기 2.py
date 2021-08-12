@@ -1,5 +1,4 @@
 import sys
-import queue
 
 # t = int(input())
 # for i in range(t):
@@ -11,14 +10,6 @@ import queue
 #     #리스트 -> 문자열
 #     result = " ".join(case)
 #     print(result)
-#
 
-# 큐으로 다시 풀기
+# 스택으로 다시 풀기
 
-t = int(sys.stdin.readline())
-
-for i in range(t):
-    case = sys.stdin.readline().split()
-    for i in range(len(case)):
-        q= queue.Queue()
-        print(q.qsize())

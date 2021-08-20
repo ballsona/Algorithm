@@ -1,15 +1,30 @@
-import sys
 
-# t = int(input())
-# for i in range(t):
-#     #문장 입력받기
-#     case = sys.stdin.readline().split()
-#     #단어마다 reverse 하기
-#     for i in range(len(case)) :
-#         case[i] = ''.join(reversed(case[i]))
-#     #리스트 -> 문자열
-#     result = " ".join(case)
-#     print(result)
+# 스택으로 풀거임
 
-# 스택으로 다시 풀기
+data = list(input())
+inTag = False
+stack = []
+tag = []
+answer = []
 
+for i in range(len(data)):
+    if not inTag: #tag 밖
+        if data[i] == "<":
+            inTag= True
+            tag.append(data[i])
+            answer += reversed(stack)
+            stack=[]
+        elif data[i] != " ":
+            stack.append(data[i])
+        elif data[i] == " ":
+            answer += reversed(stack)
+            answer.append(" ")
+            stack=[]
+    elif inTag: #tag 안
+        tag.append(data[i])
+        if data[i]==">":
+            inTag = False
+            answer += tag
+            tag=[]
+answer += reversed(stack)
+print("".join(answer))

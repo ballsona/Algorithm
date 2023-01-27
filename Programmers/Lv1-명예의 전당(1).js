@@ -1,5 +1,5 @@
 function solution(k, score) {
-  var scores = [];
+  let scores = [];
 
   return [...score].map((s, idx) => {
     scores.push(s);

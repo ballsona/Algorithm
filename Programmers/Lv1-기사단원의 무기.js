@@ -1,8 +1,8 @@
 function solution(number, limit, power) {
-  var answer = 0;
-  for (var i = 1; i <= number; i++) {
-    var ftr = 1; // 자기 자신 포함
-    for (var j = 1; j <= i / 2; j++) {
+  let answer = 0;
+  for (let i = 1; i <= number; i++) {
+    let ftr = 1; // 자기 자신 포함
+    for (let j = 1; j <= i / 2; j++) {
       if (i % j === 0) ftr++;
     }
     answer += ftr > limit ? power : ftr;

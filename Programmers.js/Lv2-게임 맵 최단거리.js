@@ -25,6 +25,44 @@ function solution(maps) {
   return min === 100 ? -1 : min;
 }
 
+// bfs
+function solution(maps) {
+  let answer = 1;
+  let queue = [];
+  const dx = [-1, 1, 0, 0];
+  const dy = [0, 0, -1, 1];
+  const n = maps.length;
+  const m = maps[0].length;
+
+  queue.push([0, 0]);
+  maps[0][0] = 0;
+
+  while (queue.length > 0) {
+    let size = queue.length;
+
+    for (let i = 0; i < size; i++) {
+      let [x, y] = queue.shift();
+
+      // 저장된 위치에서 위,아래,좌측,우측 이동 가능 경로 확인하기
+      for (let j = 0; j < 4; j++) {
+        let nx = x + dx[j];
+        let ny = y + dy[j];
+
+        if (nx >= 0 && nx < n && ny >= 0 && ny < m && maps[nx][ny] === 1) {
+          // 도착 지점 바로 직전
+          if (nx == n - 1 && ny == m - 1) {
+            return answer + 1;
+          }
+          queue.push([nx, ny]);
+          maps[nx][ny] = 0;
+        }
+      }
+    }
+    answer++;
+  }
+  return -1;
+}
+
 console.log(
   solution([
     [1, 0, 1, 1, 1],

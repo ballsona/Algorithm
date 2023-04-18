@@ -29,23 +29,3 @@ rl.on('line', function (input) {
   /////////////////////////////
   process.exit();
 });
-
-//while (cost.length > 2) {
-//  let paths = [];
-
-//  for (let i = 0; i < d.length; i++) {
-//    let sum = 0n;
-//    d.forEach((d, idx) => {
-//      if (idx <= i) sum += cost[0] * d;
-//      else sum += cost[idx] * d;
-//    });
-//    paths.push(sum);
-//  }
-//  let minIdx = paths.findLastIndex((p) => p === BigIntMin(...paths));
-
-//  res.push(cost[0] * d.slice(0, minIdx + 1).reduce((a, b) => a + b));
-//  cost.splice(0, minIdx + 1);
-//  d.splice(0, minIdx + 1);
-//}
-
-//console.log(String(res.reduce((a, b) => a + b)));

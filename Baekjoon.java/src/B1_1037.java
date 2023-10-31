@@ -3,6 +3,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+/**
+ * N의 약수의 개수와 약수들을 가지고 N을 구하기
+ * -> N = (약수 중 최솟값) * (약수 중 최댓값)
+ */
 class B1_1037 {
     static int C, max, min;
 
@@ -13,7 +17,6 @@ class B1_1037 {
 
         String[] inputs = br.readLine().split(" ");
         int[] divs = new int[C];
-        
         for(int i=0;i<C;i++) {
             divs[i] = Integer.parseInt(inputs[i]);
         }
@@ -23,5 +26,3 @@ class B1_1037 {
         System.out.println(max*min);
     }
 }
-
-// N의 약수의 개수와 약수들을 가지고 N을 구하기 -> 약수 중 최솟값*최댓값

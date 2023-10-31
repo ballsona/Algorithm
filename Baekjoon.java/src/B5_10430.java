@@ -13,6 +13,12 @@ class B5_10430 {
         A = Integer.parseInt(st.nextToken());
         B = Integer.parseInt(st.nextToken());
         C = Integer.parseInt(st.nextToken());
+
+//        String[] inputs = br.readLine().split(" ");
+//        A = Integer.parseInt(inputs[0]);
+//        B = Integer.parseInt(inputs[1]);
+//        C = Integer.parseInt(inputs[2]);
+
         System.out.println((A+B)%C);
         System.out.println(((A%C) + (B%C))%C);
         System.out.println((A*B)%C);

@@ -1,12 +1,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 /**
  * 브루트포스 방식으로 풀이했던 문제.
  * 2차원 배열의 각 요소들을 순회하며 만약 인근 요소와 값이 다르다면 값을 교체 후,
- * 각 열/행 들의 문자 개수 최댓값을  구해주는 문제였다.
+ * 각 열/행 들의 문자 개수 최댓값을 구해줌
  */
 class S2_3085 {
     static String s;

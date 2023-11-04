@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
  * 100번에서 N번으로 채널을 이동할 때 버튼을 눌러야할 최소 횟수
  * -> 브루트포스 알고리즘
  */
-class Main {
+class G5_1107 {
     static int m,i,j, target, cnt;
     static String s, brokens;
     static boolean[] buttons;

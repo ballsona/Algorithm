@@ -7,7 +7,7 @@ import java.util.Arrays;
  * 1부터 N까지의 수로 이루어진 순열. 사전 순으로 다음에 오는 순열을 구하는 프로그램을 작성해라 (마지막인 경우 -1)
  */
 class S3_10972 {
-    static int N, j;
+    static int N;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,7 +30,7 @@ class S3_10972 {
             }
         }
 
-        // 만약 n이 N이라면, 즉 순열의 모든 요소가 오름차순으로 정렬되어 있다면 -1을 출력한다.
+        // 만약 n이 N이라면, 즉 순열의 모든 요소가 내림차순으로 정렬되어 있다면 -1을 출력한다.
         if (n == N) {
             System.out.println(-1);
             return;

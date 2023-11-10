@@ -17,9 +17,8 @@ import java.util.Collections;
  * 1로 만들기. 다이나믹 프로그래밍
  *
  */
-class Main {
+class S3_1463 {
     static int X;
-    static long[] nums;
     private static int dp(int n, int count) {
         if(n < 2) return count;
 
@@ -32,6 +31,3 @@ class Main {
         System.out.println(dp(X,0));
     }
 }
-
-// 1부터 X까지 담은 배열을 만든다.
-// 2부터 순회하면서 해당 숫자가 1로 갈 수 있는 방법의 최소횟수를 배열에 넣는다.

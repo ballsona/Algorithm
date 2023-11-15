@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 
 /**
@@ -41,81 +43,82 @@ class S2_1260 {
         // BFS 출력
         graph.bfs(vlist,V-1);
     }
-}
 
-/** 정점 클래스 */
-class Vertex {
-    int num; // 정점 데이터 (숫자)
-    boolean visited; // 정점 방문 여부
-    LinkedList<Vertex> adlist = new LinkedList<>();
 
-    public Vertex(int num) {
-        this.num = num;
-        this.visited = false;
-    }
-}
+    /** 정점 클래스 */
+    static private class Vertex {
+        int num; // 정점 데이터 (숫자)
+        boolean visited; // 정점 방문 여부
+        LinkedList<Vertex> adlist = new LinkedList<>();
 
-/** 그래프 클래스 */
-class Graph {
-    int n;
-    public Graph(int n) {
-        this.n = n;
-    }
-
-    Vertex[] setVertexList() {
-        Vertex[] vlist = new Vertex[n];
-        for(int i=0;i<n;i++) {
-            vlist[i] = new Vertex(i+1);
-        }
-        return vlist;
-    };
-
-    LinkedList<Vertex> sortAdList(LinkedList<Vertex> adlist) {
-        adlist.sort(new Comparator<Vertex>() {
-            public int compare(Vertex v1, Vertex v2) {
-                return v1.num - v2.num;
-            }
-        });
-        return adlist;
-    };
-
-    void addEdge(Vertex s, Vertex d) {
-        s.adlist.add(d);
-        d.adlist.add(s);
-        s.adlist = sortAdList(s.adlist);
-        d.adlist = sortAdList(d.adlist);
-    };
-
-    // i를 시작으로 dfs 탐색 - 재귀
-    void dfs(Vertex[] vlist, int i) {
-        if(vlist[i].visited) return;
-
-        vlist[i].visited = true;
-        System.out.print(vlist[i].num + " ");
-
-        for(Vertex adjV: vlist[i].adlist) {
-            if(!adjV.visited) {
-                dfs(vlist, adjV.num - 1);
-            }
+        public Vertex(int num) {
+            this.num = num;
+            this.visited = false;
         }
     }
 
-    // i를 시작으로 bfs 탐색
-    void bfs(Vertex[] vlist, int i) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(i);
+    /** 그래프 클래스 */
+    static private class Graph {
+        int n;
+        public Graph(int n) {
+            this.n = n;
+        }
 
-        int curr;
-        while(!queue.isEmpty()) {
-            curr = queue.poll();
-            if(vlist[curr].visited) continue;
+        Vertex[] setVertexList() {
+            Vertex[] vlist = new Vertex[n];
+            for(int i=0;i<n;i++) {
+                vlist[i] = new Vertex(i+1);
+            }
+            return vlist;
+        };
 
-            vlist[curr].visited = true;
-            System.out.print(vlist[curr].num+ " ");
+        LinkedList<Vertex> sortAdList(LinkedList<Vertex> adlist) {
+            adlist.sort(new Comparator<Vertex>() {
+                public int compare(Vertex v1, Vertex v2) {
+                    return v1.num - v2.num;
+                }
+            });
+            return adlist;
+        };
 
-            for(Vertex adjV: vlist[curr].adlist) {
-                if(!adjV.visited && !queue.contains(adjV.num-1)) {
-                    queue.add(adjV.num - 1);
+        void addEdge(Vertex s, Vertex d) {
+            s.adlist.add(d);
+            d.adlist.add(s);
+            s.adlist = sortAdList(s.adlist);
+            d.adlist = sortAdList(d.adlist);
+        };
+
+        // i를 시작으로 dfs 탐색 - 재귀
+        void dfs(Vertex[] vlist, int i) {
+            if(vlist[i].visited) return;
+
+            vlist[i].visited = true;
+            System.out.print(vlist[i].num + " ");
+
+            for(Vertex adjV: vlist[i].adlist) {
+                if(!adjV.visited) {
+                    dfs(vlist, adjV.num - 1);
+                }
+            }
+        }
+
+        // i를 시작으로 bfs 탐색
+        void bfs(Vertex[] vlist, int i) {
+            Queue<Integer> queue = new LinkedList<>();
+            queue.add(i);
+
+            int curr;
+            while(!queue.isEmpty()) {
+                curr = queue.poll();
+                if(vlist[curr].visited) continue;
+
+                vlist[curr].visited = true;
+                System.out.print(vlist[curr].num+ " ");
+
+                for(Vertex adjV: vlist[curr].adlist) {
+                    if(!adjV.visited && !queue.contains(adjV.num-1)) {
+                        queue.add(adjV.num - 1);
+                    }
                 }
             }
         }

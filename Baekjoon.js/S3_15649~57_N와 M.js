@@ -1,11 +1,12 @@
 const fs = require('fs');
-
-let inputs = fs.readFileSync('input.txt').toString().split('\n');
+const inputs = fs.readFileSync('input.txt').toString().split('\n');
 
 const [N, M] = inputs[0].split(' ').map(Number);
 const arr = [];
+const result = [];
 
-solution2(1);
+solution3(1);
+console.log(result.join('\n'));
 
 // #15649: 1부터 n까지 자연수 중에서 중복 없이 m개를 고른 수열
 function solution1(n) {
@@ -35,5 +36,18 @@ function solution2(n) {
       solution2(n + 1);
       arr.pop(i);
     }
+  }
+}
+
+// #15651: 1부터 n까지 자연수 중에서 중복 가능해서 m개를 고른 수열
+function solution3(n) {
+  if (arr.length >= M) {
+    result.push(arr.join(' '));
+    return;
+  }
+  for (let i = 1; i <= N; i++) {
+    arr.push(i);
+    solution3(n + 1);
+    arr.pop(i);
   }
 }

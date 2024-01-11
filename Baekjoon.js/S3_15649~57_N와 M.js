@@ -9,7 +9,7 @@ const nums = inputs[1]
 const arr = [];
 const result = [];
 
-solution5(0);
+solution6(0);
 console.log(result.join('\n'));
 
 // #15649: 1부터 n까지 자연수 중에서 중복 없이 m개를 고른 수열
@@ -81,6 +81,21 @@ function solution5(idx) {
     if (!arr.includes(nums[i])) {
       arr.push(nums[i]);
       solution5(idx + 1);
+      arr.pop(nums[i]);
+    }
+  }
+}
+
+// #15655: 주어진 n개의 자연수 중에서 중복 없이 m개를 고른 수열 + 오름차순 수열만
+function solution6(idx) {
+  if (arr.length >= M) {
+    result.push(arr.join(' '));
+    return;
+  }
+  for (let i = 0; i < N; i++) {
+    if (arr.every((n) => n < nums[i])) {
+      arr.push(nums[i]);
+      solution6(idx + 1);
       arr.pop(nums[i]);
     }
   }

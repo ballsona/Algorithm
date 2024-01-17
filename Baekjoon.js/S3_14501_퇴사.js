@@ -11,7 +11,9 @@ const Arr = inputs.slice(1).map((s) => s.split(' ').map((n) => +n)); // [상담 
 //let max = -1;
 //solution_recur(0, 0);
 //console.log(max);
-console.log(solution_dp());
+
+//console.log(solution_topdown_dp());
+console.log(solution_bottomup_dp());
 
 /////////////////////////////
 
@@ -31,7 +33,30 @@ function solution_recur(idx, money) {
 }
 
 // 탑다운 DP 이용한 풀이
-function solution_dp() {
+function solution_topdown_dp() {
+  const prefix = new Array(N + 1).fill(-1);
+
+  function dp_recur(idx) {
+    if (idx == N) {
+      return 0;
+    }
+    if (idx > N) {
+      return -9999;
+    }
+    if (prefix[idx] != -1) {
+      return prefix[idx];
+    }
+    // 상담 안하기 vs 하기
+    prefix[idx] = Math.max(dp_recur(idx + Arr[idx][0]) + Arr[idx][1], dp_recur(idx + 1));
+    return prefix[idx];
+  }
+  dp_recur(0);
+
+  return prefix[0];
+}
+
+// 바텀업 DP 이용한 풀이
+function solution_bottomup_dp() {
   const prefix = new Array(N + 1).fill(0);
 
   for (let i = N - 1; i >= 0; i--) {

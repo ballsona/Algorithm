@@ -11,22 +11,25 @@ console.log(solution(Coins));
 /////////////////////////////
 
 function solution(coins) {
-  const dp = new Array(N).fill().map((i) => new Array(K + 1).fill(0));
+  const dp = new Array(K + 1).fill(0);
 
+  let prev;
   for (let i = 0; i < N; i++) {
-    const value = coins[i];
+    prev = dp.slice();
     for (let k = 0; k <= K; k++) {
+      // 첫번째라면 배수만 일단 모두 1로 채우기
       if (i == 0) {
-        if (k % value == 0) dp[i][k]++;
+        if (k % coins[i] == 0) dp[k]++;
         continue;
       }
-      dp[i][k] += dp[i - 1][k];
+      // 베수면 1 넣고 아니면 그냥 넣고
       let p = 1;
-      while (p * value <= k) {
-        dp[i][k] += dp[i - 1][k - p * value];
+      while (p * coins[i] <= k) {
+        dp[k] += prev[k - p * coins[i]];
         p++;
       }
     }
   }
-  return dp[N - 1][K];
+
+  return dp[K];
 }

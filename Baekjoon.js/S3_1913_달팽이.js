@@ -2,40 +2,45 @@ const filePath = process.platform === 'linux' ? '/dev/stdin' : 'input.txt';
 const inputs = require('fs').readFileSync(filePath).toString().trim().split('\n');
 
 const N = +inputs[0];
-console.log(solution());
+const T = +inputs[1];
+solution();
 
 /////////////////////////////
 
 function solution() {
-  const graph = new Array(N).fill().map((i) => new Array(N).fill(0));
-  const half = Math.floor(N % 2);
+  const graph = new Array(N).fill().map((_) => new Array(N).fill(0));
+  const half = Math.floor(N / 2);
 
   let [x, y] = [half, half];
-  let [min, max] = [half - 1, half + 1];
-  let num = 1;
+  let [t, l] = [1, 3];
+  graph[x][y] = t;
 
-  graph[x][y] = num;
-  x--;
+  while (l <= N) {
+    // 이동 시작
+    graph[x--][y] = t++;
+    // 오른쪽으로 이동
+    for (let i = 0; i < l - 2; i++) graph[x][y++] = t++;
+    // 아래로 이동
+    for (let i = 0; i < l - 1; i++) graph[x++][y] = t++;
+    // 왼쪽으로 이동
+    for (let i = 0; i < l - 1; i++) graph[x][y--] = t++;
+    // 위로 이동
+    for (let i = 0; i < l - 1; i++) graph[x--][y] = t++;
 
-  while (x == 0 && y == 0) {
-    if (x == min && y < max) {
-      y++;
-    } else if (x <= min && y == max) {
-      x++;
-    } else if (x == max && y > min) {
-      y--;
-    } else if (x >= min && y == min) {
-      x--;
-    }
-
-    // 좌표값 업데이트
-    graph[x][y] = num++;
-    // 현재 범위 모두 돌면 min, max 업데이트
-    if (x == min && y == min) {
-      min--;
-      max++;
-    }
-    console.log(graph);
+    l += 2;
   }
+  graph[x][y] = N ** 2;
+
+  let [tx, ty] = [0, 0];
+  for (let i = 0; i < N; i++) {
+    for (let j = 0; j < N; j++) {
+      if (graph[i][j] == T) [tx, ty] = [i + 1, j + 1];
+    }
+  }
+
+  // 그래프 출력
+  console.log(graph.map((s) => s.join(' ')).join('\n'));
+  // 좌표 출력
+  console.log(tx, ty);
   return 1;
 }
